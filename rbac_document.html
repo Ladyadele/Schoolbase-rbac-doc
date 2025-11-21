@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RBAC Document - Open School Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* General styles */
+        body {
+            font-family: 'Outfit', sans-serif;
+            font-size: 11px;
+            color: #3C4043;
+            line-height: 1.6;
+            background-color: #E8F0FE;
+            margin: 20px;
+        }
+
+        h1, h2, h3 {
+            margin: 15px 0 10px 0;
+            color: #202124;
+        }
+
+        h1 { font-size: 15px; }
+        h2 { font-size: 13px; }
+        h3 { font-size: 13px; }
+
+        p {
+            margin: 8px 0;
+        }
+
+        ul, ol {
+            margin: 8px 0 8px 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0 20px 0;
+            background-color: #fff;
+        }
+
+        th, td {
+            border: 1px solid #D2E3FC;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #1A73E8;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        td {
+            color: #3C4043;
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .capability-table th, .capability-table td {
+            font-size: 11px;
+        }
+
+        .rbac-table th, .rbac-table td {
+            font-size: 11px;
+            text-align: center;
+        }
+
+        .rbac-table th {
+            background-color: #1A73E8;
+            color: #fff;
+        }
+
+        .rbac-table td {
+            background-color: #ECF0FE;
+        }
+
+        .restriction-table th {
+            background-color: #1A73E8;
+            color: #fff;
+        }
+
+        .restriction-table td {
+            background-color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>ROLE-BASED ACCESS CONTROL (RBAC) DOCUMENT — OPEN SCHOOL PORTAL (OSP)</h1>
+    <p><strong>For High School Multi-Role Academic Management</strong></p>
+
+    <div class="section">
+        <h2>1. Overview</h2>
+        <p>OSP uses a role-based access control system (RBAC) to ensure that each user has access only to the features necessary for their duties. Because this system is designed for high schools, user relationships such as:</p>
+        <ul>
+            <li>Teacher ↔ Class</li>
+            <li>Teacher ↔ Subject</li>
+            <li>Class ↔ Students</li>
+            <li>Subject ↔ Timetable Slots</li>
+        </ul>
+        <p>…are tightly integrated into permissions.</p>
+        <p>Roles covered in this RBAC document:</p>
+        <ul>
+            <li>Super Admin</li>
+            <li>Admin</li>
+            <li>Teacher</li>
+            <li>Student</li>
+            <li>Parent</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>2. Role Definitions & Permissions</h2>
+
+        <h3>2.1 SUPER ADMIN (School Owner / First Account Created)</h3>
+        <p><strong>Summary:</strong> The Super Admin is the first account created after installation setup. They have full authority over the entire school instance.</p>
+        
+        <table class="capability-table">
+            <tr>
+                <th>Capability</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>Full System Access</td>
+                <td>Can use and modify any feature or data.</td>
+            </tr>
+            <tr>
+                <td>User Creation</td>
+                <td>Create Admin, Teacher, Student, and Parent accounts.</td>
+            </tr>
+            <tr>
+                <td>Academic Structure Management</td>
+                <td>Creates sessions, terms, classes, and streams.</td>
+            </tr>
+            <tr>
+                <td>Class-Subject Assignment</td>
+                <td>Assigns teachers to classes and subjects.</td>
+            </tr>
+            <tr>
+                <td>Timetable Management</td>
+                <td>Creates full school timetable.</td>
+            </tr>
+            <tr>
+                <td>Permissions Management</td>
+                <td>Assigns access rights to Admins.</td>
+            </tr>
+            <tr>
+                <td>School Branding</td>
+                <td>Updates school logo, colors, metadata.</td>
+            </tr>
+            <tr>
+                <td>System Maintenance</td>
+                <td>Data backup, restore, audit logs review.</td>
+            </tr>
+        </table>
+        <p><strong>Restrictions:</strong> None — highest privilege level.</p>
+
+        <h3>2.2 ADMIN</h3>
+        <p><strong>Summary:</strong> Admins handle day-to-day school operations and manage academic/administrative data.</p>
+        <table class="capability-table">
+            <tr>
+                <th>Capability</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>User Creation</td>
+                <td>Create Teacher, Student, and Parent accounts.</td>
+            </tr>
+            <tr>
+                <td>Class & Stream Management</td>
+                <td>Create classes, assign class teachers, associate students.</td>
+            </tr>
+            <tr>
+                <td>Student Enrollment</td>
+                <td>Add/edit/remove students.</td>
+            </tr>
+            <tr>
+                <td>Teacher Management</td>
+                <td>Create teacher accounts and assign subjects & classes.</td>
+            </tr>
+            <tr>
+                <td>Timetable Management</td>
+                <td>Create/Edit timetables for classes.</td>
+            </tr>
+            <tr>
+                <td>Attendance Oversight</td>
+                <td>View attendance summaries submitted via teacher NFC check-ins.</td>
+            </tr>
+            <tr>
+                <td>Report Cards</td>
+                <td>Approve or publish teacher-entered grades.</td>
+            </tr>
+            <tr>
+                <td>Notices</td>
+                <td>Create and broadcast school-wide announcements.</td>
+            </tr>
+        </table>
+        <table class="restriction-table">
+            <tr>
+                <th>Restriction</th>
+                <th>Notes</th>
+            </tr>
+            <tr>
+                <td>Cannot edit Super Admin</td>
+                <td>Cannot delete or downgrade this role.</td>
+            </tr>
+            <tr>
+                <td>Cannot fully access audit logs</td>
+                <td>View-only or restricted access.</td>
+            </tr>
+            <tr>
+                <td>Cannot handle system-level settings</td>
+                <td>Domains, instance branding, backups.</td>
+            </tr>
+        </table>
+
+        <h3>2.3 TEACHER</h3>
+        <p><strong>Summary:</strong> Teachers handle class-based academic tasks. In the MVP: Students do not use NFC; teachers are the only NFC users.</p>
+        <table class="capability-table">
+            <tr>
+                <th>Capability</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>Class Attendance</td>
+                <td>Use NFC to check into class they are teaching.</td>
+            </tr>
+            <tr>
+                <td>Daily Attendance</td>
+                <td>Mark attendance for students in their assigned class.</td>
+            </tr>
+            <tr>
+                <td>Grade Entry</td>
+                <td>Enter subject grades for students in assigned classes.</td>
+            </tr>
+            <tr>
+                <td>Timetable View</td>
+                <td>See personal teaching schedule.</td>
+            </tr>
+            <tr>
+                <td>Notices</td>
+                <td>View notices directed to teachers/classes.</td>
+            </tr>
+        </table>
+        <table class="restriction-table">
+            <tr>
+                <th>Restriction</th>
+                <th>Notes</th>
+            </tr>
+            <tr>
+                <td>Cannot create accounts</td>
+                <td>Admin and Super Admin only.</td>
+            </tr>
+            <tr>
+                <td>Cannot modify classes or subjects</td>
+                <td>Assignments done by Admin/Super Admin.</td>
+            </tr>
+            <tr>
+                <td>Cannot see data of classes/subjects not assigned</td>
+                <td>Strict data isolation.</td>
+            </tr>
+            <tr>
+                <td>Cannot modify published report cards</td>
+                <td>Only Admin/Super Admin can publish.</td>
+            </tr>
+        </table>
+
+        <h3>2.4 STUDENT</h3>
+        <p><strong>Summary:</strong> Students have view-only access to their school information.</p>
+        <table class="capability-table">
+            <tr>
+                <th>Capability</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>View Timetable</td>
+                <td>See assigned classes.</td>
+            </tr>
+            <tr>
+                <td>View Attendance</td>
+                <td>See daily/term attendance history.</td>
+            </tr>
+            <tr>
+                <td>View Results</td>
+                <td>Access report cards, subject grades.</td>
+            </tr>
+            <tr>
+                <td>View Notices</td>
+                <td>Receive class/school announcements.</td>
+            </tr>
+        </table>
+        <p><strong>Restrictions:</strong> Cannot edit personal data, mark attendance, submit grades, or use NFC.</p>
+
+        <h3>2.5 PARENT</h3>
+        <p><strong>Summary:</strong> Parents have view-only access, focused on monitoring their child’s school experience.</p>
+        <table class="capability-table">
+            <tr>
+                <th>Capability</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>View Child’s Profile</td>
+                <td>Basic student data.</td>
+            </tr>
+            <tr>
+                <td>Attendance</td>
+                <td>See student’s daily/term attendance.</td>
+            </tr>
+            <tr>
+                <td>Results</td>
+                <td>View report cards.</td>
+            </tr>
+            <tr>
+                <td>Notices</td>
+                <td>See school-wide communications.</td>
+            </tr>
+        </table>
+        <p><strong>Restrictions:</strong> Cannot edit any data, no attendance/academic actions, no NFC usage.</p>
+
+    </div>
+
+    <div class="section">
+        <h2>3. How Teachers Are Linked to Classes & Subjects</h2>
+        <h3>3.1 Academic Structure</h3>
+        <p><strong>Hierarchy:</strong></p>
+        <pre>
+School
+ └── Academic Session (2024/2025)
+       └── Term (Term 1, 2, 3)
+             └── Class (e.g., SS1)
+                  └── Stream (A, B, C)
+                        └── Students
+        </pre>
+        <p><strong>Subjects:</strong> Subjects exist at school level (e.g., Mathematics, English, Physics). Admin assigns subjects to classes (e.g., SS1A → Mathematics, English).</p>
+
+        <h3>3.2 Linking Teachers to Classes & Subjects</h3>
+        <p>This relationship controls:</p>
+        <ul>
+            <li>Where they can take attendance</li>
+            <li>Which students they can grade</li>
+            <li>What timetable slots they can see</li>
+            <li>Which NFC check-ins are valid</li>
+        </ul>
+        <pre>
+Relationship Model
+Teacher
+   ↕ Assigned To
+Class
+   ↕ Teaches
+Subject
+        </pre>
+        <p><strong>What It Means Functionally:</strong></p>
+        <table class="capability-table">
+            <tr>
+                <th>Action</th>
+                <th>Requires</th>
+            </tr>
+            <tr>
+                <td>Teacher takes attendance</td>
+                <td>They must be assigned to the class for that subject period.</td>
+            </tr>
+            <tr>
+                <td>Teacher enters grades</td>
+                <td>Must be the assigned subject teacher for that class.</td>
+            </tr>
+            <tr>
+                <td>Teacher checks in via NFC</td>
+                <td>Must have an active period in the timetable at that time.</td>
+            </tr>
+            <tr>
+                <td>Teacher views timetable</td>
+                <td>Shows only assigned classes/subjects.</td>
+            </tr>
+        </table>
+
+        <h3>3.3 Example</h3>
+        <p><strong>Teacher:</strong> Mrs. Ade</p>
+        <p><strong>Assigned Subjects:</strong> Mathematics</p>
+        <p><strong>Assigned Classes:</strong> SS1A, SS2A</p>
+        <p><strong>Timetable example:</strong></p>
+        <ul>
+            <li>Monday 8:00–9:00 → SS1A Math</li>
+            <li>Tuesday 10:00–11:00 → SS2A Math</li>
+        </ul>
+        <p>Mrs. Ade can only:</p>
+        <ul>
+            <li>Take attendance for SS1A or SS2A during scheduled Math period</li>
+            <li>Enter Math grades for SS1A/SS2A</li>
+            <li>See notices affecting SS1A/SS2A</li>
+            <li>Cannot see other subjects/other classes</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>4. RBAC Mapping Table (Quick Reference)</h2>
+        <table class="rbac-table">
+            <tr>
+                <th>Feature</th>
+                <th>Super Admin</th>
+                <th>Admin</th>
+                <th>Teacher</th>
+                <th>Student</th>
+                <th>Parent</th>
+            </tr>
+            <tr>
+                <td>Create Users</td>
+                <td>✔️</td>
+                <td>✔️ (except Super Admin)</td>
+                <td>❌</td>
+                <td>❌</td>
+                <td>❌</td>
+            </tr>
+            <tr>
+                <td>Manage Classes</td>
+                <td>✔️</td>
+                <td>✔️</td>
+                <td>❌</td>
+                <td>❌</td>
+                <td>❌</td>
+            </tr>
+            <tr>
+                <td>Assign Teachers</td>
+                <td>✔️</td>
+                <td>✔️</td>
+                <td>❌</td>
+                <td>❌</td>
+                <td>❌</td>
+            </tr>
+            <tr>
+                <td>NFC Class Check-in</td>
+                <td>❌</td>
+                <td>❌</td>
+                <td>✔️</td>
+                <td>❌</td>
+                <td>❌</td>
+            </tr>
+            <tr>
+                <td>Take Attendance</td>
+                <td>❌</td>
+                <td>View Only</td>
+                <td>✔️</td>
+                <td>View Only</td>
+                <td>View Only</td>
+            </tr>
+            <tr>
+                <td>Enter Grades</td>
+                <td>❌</td>
+                <td>Approve/Publish</td>
+                <td>✔️</td>
+                <td>View Only</td>
+                <td>View Only</td>
+            </tr>
+            <tr>
+                <td>Timetable Manage</td>
+                <td>✔️</td>
+                <td>✔️</td>
+                <td>View</td>
+                <td>View</td>
+                <td>View</td>
+            </tr>
+            <tr>
+                <td>Notices</td>
+                <td>✔️</td>
+                <td>✔️</td>
+                <td>View</td>
+                <td>View</td>
+                <td>View</td>
+            </tr>
+            <tr>
+                <td>System Settings</td>
+                <td>✔️</td>
+                <td>❌</td>
+                <td>❌</td>
+                <td>❌</td>
+                <td>❌</td>
+            </tr>
+        </table>
+    </div>
+
+</body>
+</html>
